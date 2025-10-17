@@ -299,9 +299,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &526377336
 BoxCollider2D:
@@ -611,7 +611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d03809601de2b3847ba771ba79792f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDefaultWeaponController
-  _initialWeaponSetting: {fileID: 11400000, guid: 270ebb7d57262c949aeed2f532ad8535, type: 2}
+  _currentWeaponSettings: {fileID: 11400000, guid: 270ebb7d57262c949aeed2f532ad8535, type: 2}
   _bulletPrefab: {fileID: 819211374101979904, guid: 4d2c9e37d3e069a4399ba5e72672b9dd, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

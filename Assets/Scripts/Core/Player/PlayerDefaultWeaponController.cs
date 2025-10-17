@@ -8,12 +8,11 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
 {
     private const int _initialBulletCount = 30;
     
-    [SerializeField] private PlayerWeaponSettingsSO _initialWeaponSetting;
+    [SerializeField] private PlayerWeaponSettingsSO _currentWeaponSettings;
     [SerializeField] private GameObject _bulletPrefab;
     
     private bool _canShoot;
     private InputSystem_Actions _inputSystem;
-    private PlayerWeaponSettingsSO _currentWeaponSettings;
     private Pool.GameObj _bulletPool;
     private Coroutine _shootingRoutine;
     private Vector2 _currentAimDirection = Vector2.right;
@@ -22,7 +21,7 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
     {
         _shootingRoutine = null;
         _bulletPool = new Pool.GameObj(_initialBulletCount ,_bulletPrefab, transform);
-        ChangeWeapon(_initialWeaponSetting);
+        ChangeWeapon(_currentWeaponSettings);
         
         _inputSystem = inputSystem;
         _inputSystem.Player.Shoot.performed += OnShootStart;

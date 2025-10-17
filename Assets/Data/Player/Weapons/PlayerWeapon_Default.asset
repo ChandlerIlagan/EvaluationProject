@@ -10,9 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8488e3f989cbf714189ccbd97c612525, type: 3}
-  m_Name: PlayerWeaponDefault
+  m_Name: PlayerWeapon_Default
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponSettingsSO
-  _shootForce: 12
-  _shootAmount: 1
-  _shootSpread: 0
-  _reloadTime: 0.2
+  _shootForce: 18
+  _reloadTime: 0.15
