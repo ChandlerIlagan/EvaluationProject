@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponController
 {
     [SerializeField] private PlayerWeaponSettingsSO _initialWeaponSetting;
+    [SerializeField] private GameObject _bulletPrefab;
     
     private bool _canShoot;
     private InputSystem_Actions _inputSystem;
@@ -19,11 +20,6 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
     }
 
     private void OnShoot(InputAction.CallbackContext obj)
-    {
-        
-    }
-
-    private void Update()
     {
         
     }

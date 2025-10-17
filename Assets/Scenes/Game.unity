@@ -438,7 +438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
   _playerSettings: {fileID: 11400000, guid: 332fd9043cae31e4ea8bd2324ce31bc1, type: 2}
   _playerIMovement: {fileID: 800344741}
-  _playerIWeaponController: {fileID: 0}
+  _playerIWeaponController: {fileID: 2070057800}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,7 +611,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d03809601de2b3847ba771ba79792f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDefaultWeaponController
-  _initialWeaponSetting: {fileID: 0}
+  _initialWeaponSetting: {fileID: 11400000, guid: 270ebb7d57262c949aeed2f532ad8535, type: 2}
+  _bulletPrefab: {fileID: 819211374101979904, guid: 4d2c9e37d3e069a4399ba5e72672b9dd, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
