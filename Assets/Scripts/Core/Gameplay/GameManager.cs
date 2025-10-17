@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
         get => _currentGameState;
         set
         {
-            if (value == GameState.GameOver || value == GameState.Pause || value == GameState.Win)
-                PauseGame();
+            if (value == GameState.GameOver || value == GameState.Win)
+                Time.timeScale = 0;
                 
             _currentGameState = value;
             OnGameStateChange?.Invoke(value);

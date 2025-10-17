@@ -4,10 +4,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerManager : MonoBehaviour
 {
+    [Header("Dependencies-settings")]
     [SerializeField] private PlayerSettingsSO _playerSettings;
+    [Header("Dependencies-interfaces")]
     [SerializeField] private MonoBehaviour _playerIMovement;
     [SerializeField] private MonoBehaviour _playerIWeaponController;
     [SerializeField] private MonoBehaviour _playerIDash;
+    [Header("Dependencies-scene")]
+    [SerializeField] private DeathCone _deathCone;
 
     private IPlayerMovement _playerMovement => _playerIMovement as IPlayerMovement;
     private IPlayerWeaponController _playerWeaponController => _playerIWeaponController as IPlayerWeaponController;
@@ -41,13 +45,25 @@ public class PlayerManager : MonoBehaviour
     {
         _playerMovement.Move2DRigid(_playerRigidbody2D).WithSpeed(_playerSettings.MovementSpeed);
     }
+
+    private void DoDeath()
+    {
+        _deathCone.DoExplosion(transform.position);
+    }
     
     private void OnDestroy()
     {
         _inputSystem.Disable();
     }
-    
-    #if UNITY_EDITOR
+    private void OnCollisionEnter2D(Collision2D other)
+    {  
+        if (other.transform.CompareTag("Enemy"))
+        {
+            DoDeath();
+        }
+    }
+
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (_playerIMovement is null || _playerIMovement is not IPlayerMovement)
