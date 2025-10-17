@@ -32,8 +32,6 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        CurrentGameState = GameState.Start;
-        
         _playerMovement.EnableMovement();
         _playerWeaponController.EnableWeapons();
         _playerDash.EnableDash();

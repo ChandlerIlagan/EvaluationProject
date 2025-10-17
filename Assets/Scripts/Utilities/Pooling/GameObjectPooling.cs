@@ -67,6 +67,14 @@ namespace Utilities
               return objectToReturn;
           }
 
+          public GameObject Add(GameObject obj)
+          {
+              _objPool.Insert(0,obj);
+              return obj;
+          }
+          
+          public int Count => _objPool.Count;
+
           public GameObject Get() => Get(true);
           
           private GameObject AddNewObjInstance()
