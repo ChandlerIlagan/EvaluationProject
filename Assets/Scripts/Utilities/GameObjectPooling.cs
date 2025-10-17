@@ -8,7 +8,13 @@ using Object = System.Object;
 
 namespace Utilities
 {
-    
+    /// <summary>
+    /// Lightweight-object-pooling where it creates disabled instances
+    /// Will get first index[0] if disabled using Get()
+    /// else will create new instance
+    /// Gotten instances will push itself to last index
+    /// Disabled instances will push itself to first index
+    /// </summary>
     public static class Pool
     {
       public class GameObj
@@ -16,17 +22,25 @@ namespace Utilities
           private const int _defaultInitialPoolSize = 10;
 
           private List<GameObject> _objPool;
+          private GameObject _referenceObjInstance;
+              
           public GameObj(int size, GameObject obj)
           {
               _objPool = new List<GameObject>();
+              _referenceObjInstance = obj;
               
               for (int x = 0; x < size; x++)
-                  _objPool.Add(UnityEngine.Object.Instantiate(obj));
+                  AddNewObjInstance();
           }
 
+          private void AddNewObjInstance() => _objPool.Add(UnityEngine.Object.Instantiate(_referenceObjInstance));
           public GameObj(GameObject obj) : this(_defaultInitialPoolSize, obj) {}
               
-          public GameObject Get(int index) => _objPool[index];
+          // Gets first index if available, else, create new instance
+          public GameObject Get()
+          {
+              if ()
+          }
       }
     }
 }
