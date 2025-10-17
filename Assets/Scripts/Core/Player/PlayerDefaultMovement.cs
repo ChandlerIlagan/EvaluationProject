@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerDefaultMovement : MonoBehaviour, IPlayerMovement
 {
+    [Header("Dependencies")]
+    [SerializeField] private Transform _spriteTransform;
+    
     public bool CanMove => _canMove;
     public float DashMultiplier { get; set; }
 
@@ -44,6 +47,11 @@ public class PlayerDefaultMovement : MonoBehaviour, IPlayerMovement
             return this;
 
         body.linearVelocity = _movementOffset * _moveSpeed * DashMultiplier;
+        if (_movementOffset.sqrMagnitude > 0.001f)
+        {
+            float angle = Mathf.Atan2(_movementOffset.y, _movementOffset.x) * Mathf.Rad2Deg;
+            _spriteTransform.localEulerAngles = new Vector3(0f, 0f, angle - 90f);
+        }
         
         return this;
     }
