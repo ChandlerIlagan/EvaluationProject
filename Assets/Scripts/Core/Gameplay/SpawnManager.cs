@@ -9,10 +9,12 @@ public class SpawnManager : MonoBehaviour
     
     [Header("Dependencies")]
     [SerializeField] private GameObject _spawnReferencePrefab;
-    private Pool.GameObj _spawnPool;
     
     public static SpawnManager Instance;
-
+    
+    private Pool.GameObj _spawnPool;
+    private float _timeLastSpawned;
+    
     private void Awake()
     {
         Instance = this;
@@ -22,7 +24,19 @@ public class SpawnManager : MonoBehaviour
     public GameObject AddSpawnerToPool(GameObject obj)
     {
         _spawnPool.Add(gameObject);
-        Debug.Log($"[SpawnManager] added new spawner. Total[ {_spawnPool.Count} ]");
         return obj;
+    }
+
+    private void FixedUpdate()
+    {
+        if (Time.time - _timeLastSpawned >= _spawnDelay)
+        {
+            SpawnEnemy();
+        }
+    }
+
+    public void SpawnEnemy()
+    {
+        _timeLastSpawned = Time.time;
     }
 }

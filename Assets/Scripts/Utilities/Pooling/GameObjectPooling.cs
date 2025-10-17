@@ -70,6 +70,7 @@ namespace Utilities
           public GameObject Add(GameObject obj)
           {
               _objPool.Insert(0,obj);
+              obj.SetActive(false);
               return obj;
           }
           
