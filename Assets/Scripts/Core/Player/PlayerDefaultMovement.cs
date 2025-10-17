@@ -15,7 +15,6 @@ public class PlayerDefaultMovement : MonoBehaviour, IPlayerMovement
     public void Initialize(InputSystem_Actions inputSystem)
     {
         _inputSystem = inputSystem;
-        _inputSystem.Enable();
 
         _inputSystem.Player.Move.performed += OnMovePressed;
         _inputSystem.Player.Move.canceled += OnMoveReleased;

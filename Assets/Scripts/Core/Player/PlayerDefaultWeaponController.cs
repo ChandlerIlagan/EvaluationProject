@@ -1,19 +1,20 @@
+using System;
 using UnityEngine;
 
 public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponController
 {
-    public void Initialize()
+    private bool _canShoot;
+    
+    public void Initialize(InputSystem_Actions inputSystem)
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public void EnableWeapons()
+    private void Update()
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public void DisableWeapons()
-    {
-        throw new System.NotImplementedException();
-    }
+    public void EnableWeapons() => _canShoot = true;
+    public void DisableWeapons() => _canShoot = false;
 }

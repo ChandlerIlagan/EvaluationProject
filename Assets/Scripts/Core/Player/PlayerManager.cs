@@ -6,8 +6,10 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private PlayerSettingsSO _playerSettings;
     [SerializeField] private MonoBehaviour _playerIMovement;
+    [SerializeField] private MonoBehaviour _playerIWeaponController;
 
     private IPlayerMovement _playerMovement => _playerIMovement as IPlayerMovement;
+    private IPlayerWeaponController _playerWeaponController => _playerIWeaponController as IPlayerWeaponController;
     
     private InputSystem_Actions _inputSystem;
     private Rigidbody2D _playerRigidbody2D;
@@ -19,11 +21,13 @@ public class PlayerManager : MonoBehaviour
         _inputSystem.Enable();
         
         _playerMovement.Initialize(_inputSystem);
+        _playerWeaponController.Initialize(_inputSystem);
     }
 
     private void Start()
     {
         _playerMovement.EnableMovement();
+        _playerWeaponController.EnableWeapons();
     }
 
     private void Update()
