@@ -83,7 +83,8 @@ namespace Utilities
               if (!obj.transform.parent.gameObject.activeInHierarchy)   // fixes error throws when stopping unity editor
                   return;
               
-              obj.transform.SetAsFirstSibling();
+              if (!obj.transform.parent != null)
+                obj.transform.SetAsFirstSibling();
           }
       }
       
