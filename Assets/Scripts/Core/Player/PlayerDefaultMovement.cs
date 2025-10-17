@@ -9,6 +9,9 @@ public class PlayerDefaultMovement : MonoBehaviour, IPlayerMovement
     
     public IPlayerMovement MoveUpdate()
     {
+        if (!_canMove)
+            return this;
+        
         return this;
     }
 

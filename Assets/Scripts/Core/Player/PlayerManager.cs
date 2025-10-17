@@ -1,16 +1,17 @@
+using System;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private IPlayerMovement _playerMovement;
+
+    private void Start()
     {
-        
+        _playerMovement.EnableMovementInputs();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        _playerMovement.WithSpeed(1).MoveUpdate();
     }
 }
