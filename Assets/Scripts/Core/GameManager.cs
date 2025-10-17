@@ -12,6 +12,11 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        Score = 0;
+    }
+
     public int Score
     {
         get => _score;
