@@ -47,15 +47,13 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
 
     private IEnumerator ShootingBehavior()
     {
-        float tick = 0;
+        float timeLastShot = Time.time;
         
         while (_canShoot)
         {
-            tick += Time.deltaTime;
-
-            if (tick >= _currentWeaponSettings.ReloadTime)
+            if (Time.time - timeLastShot >= _currentWeaponSettings.ReloadTime)
             {
-                tick = 0;
+                timeLastShot = Time.time;
                 Shoot();
             }
             
