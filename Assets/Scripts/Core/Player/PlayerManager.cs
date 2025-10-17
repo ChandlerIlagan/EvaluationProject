@@ -17,7 +17,6 @@ public class PlayerManager : MonoBehaviour
     private Rigidbody2D _playerRigidbody2D;
 
     public static PlayerManager Instance;
-    public static GameState CurrentGameState = GameState.PreGame;
 
     private void Awake()
     {
@@ -57,11 +56,4 @@ public class PlayerManager : MonoBehaviour
             Debug.LogError("[PlayerManager] playerIMovement is not a valid 'IPlayerMovement' interface");
     }
     #endif
-}
-
-public enum GameState
-{
-    PreGame,
-    Start,
-    GameOver
 }
