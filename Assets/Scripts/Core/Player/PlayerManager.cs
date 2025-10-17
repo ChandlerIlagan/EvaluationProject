@@ -14,6 +14,8 @@ public class PlayerManager : MonoBehaviour
     private InputSystem_Actions _inputSystem;
     private Rigidbody2D _playerRigidbody2D;
 
+    public static GameState CurrentGameState = GameState.PreGame;
+
     private void Awake()
     {
         _playerRigidbody2D = GetComponent<Rigidbody2D>();
@@ -26,6 +28,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        CurrentGameState = GameState.Start;
         _playerMovement.EnableMovement();
         _playerWeaponController.EnableWeapons();
     }
@@ -47,4 +50,11 @@ public class PlayerManager : MonoBehaviour
             Debug.LogError("[PlayerManager] playerIMovement is not a valid 'IPlayerMovement' interface");
     }
     #endif
+}
+
+public enum GameState
+{
+    PreGame,
+    Start,
+    GameOver
 }
