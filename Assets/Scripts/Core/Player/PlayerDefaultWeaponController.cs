@@ -7,13 +7,11 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
     [SerializeField] private PlayerWeaponSettingsSO _initialWeaponSetting;
     
     private bool _canShoot;
-    private float _shootForce;
     private InputSystem_Actions _inputSystem;
     private PlayerWeaponSettingsSO _currentWeaponSettings;
     
     public void Initialize(InputSystem_Actions inputSystem, PlayerSettingsSO playerSettings)
     {
-        _shootForce = playerSettings.ShootForce;
         ChangeWeapon(_initialWeaponSetting);
         
         _inputSystem = inputSystem;
