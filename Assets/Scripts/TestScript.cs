@@ -1,16 +1,22 @@
+using System;
 using UnityEngine;
+using Utilities;
 
 public class TestScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private GameObject _prefabObj;
+
+    private Pool.GameObj _testObjPool;
+    private void Start()
     {
-        
+        _testObjPool = new Pool.GameObj(3, _prefabObj, transform);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            _testObjPool.Get();
+        }
     }
 }
