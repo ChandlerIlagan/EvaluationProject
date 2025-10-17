@@ -80,7 +80,10 @@ namespace Utilities
 
           private void OnObjectInPoolDisabled(GameObject obj)
           {
-              if (Application.isPlaying) obj.transform.SetAsFirstSibling();
+              if (!obj.transform.parent.gameObject.activeInHierarchy)   // fixes error throws when stopping unity editor
+                  return;
+              
+              obj.transform.SetAsFirstSibling();
           }
       }
       
