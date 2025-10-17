@@ -1,10 +1,11 @@
-using System;
+    using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerDefaultMovement : MonoBehaviour, IPlayerMovement
 {
     public bool CanMove => _canMove;
+    public float DashMultiplier { get; set; }
 
     private bool _canMove;
     private bool _isMoving;
@@ -41,7 +42,7 @@ public class PlayerDefaultMovement : MonoBehaviour, IPlayerMovement
         if (!_canMove)
             return this;
 
-        body.linearVelocity = _movementOffset * _moveSpeed;
+        body.linearVelocity = _movementOffset * _moveSpeed * DashMultiplier;
         
         return this;
     }

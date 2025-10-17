@@ -7,9 +7,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private PlayerSettingsSO _playerSettings;
     [SerializeField] private MonoBehaviour _playerIMovement;
     [SerializeField] private MonoBehaviour _playerIWeaponController;
+    [SerializeField] private MonoBehaviour _playerIDash;
 
     private IPlayerMovement _playerMovement => _playerIMovement as IPlayerMovement;
     private IPlayerWeaponController _playerWeaponController => _playerIWeaponController as IPlayerWeaponController;
+    private IPlayerDash _playerDash => _playerIDash as IPlayerDash;
     
     private InputSystem_Actions _inputSystem;
     private Rigidbody2D _playerRigidbody2D;
@@ -29,8 +31,10 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         CurrentGameState = GameState.Start;
+        
         _playerMovement.EnableMovement();
         _playerWeaponController.EnableWeapons();
+        _playerDash.EnableDash();
     }
 
     private void Update()
