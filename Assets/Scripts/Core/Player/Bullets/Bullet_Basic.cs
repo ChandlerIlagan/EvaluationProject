@@ -31,18 +31,21 @@ public class Bullet_Basic : MonoBehaviour, IPlayerBullet
         }
     }
 
-    private void OnDisable()
+    private void OnBecameInvisible()
+    {
+        if (gameObject.activeInHierarchy)
+            CollisionDisable();
+    }
+
+    private void CollisionDisable()
     {
         if (_isMoving)
         {
             _isMoving = false;
             StopAllCoroutines();
             
-            if (!_origParent.gameObject.activeInHierarchy)   // fixes error throws when stopping unity editor
-                return;
-            
             transform.SetParent(_origParent);
-            transform.SetAsFirstSibling();
+            gameObject.SetActive(false);
         }
     }
 }
