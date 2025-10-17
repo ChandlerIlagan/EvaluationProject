@@ -42,13 +42,6 @@ namespace Utilities
           public GameObj(GameObject obj, Transform parent) : this(_defaultInitialPoolSize, obj, parent) {}
           public GameObj(GameObject obj) : this(_defaultInitialPoolSize, obj, null) {}
 
-          private GameObject AddNewObjInstance()
-          {
-              GameObject newObj = UnityEngine.Object.Instantiate(_referenceObjInstance);
-              _objPool.Add(newObj);
-              return newObj;
-          }
-              
           public GameObject Get(bool isActiveOnGet)
           {
               GameObject objectToReturn;
@@ -63,6 +56,19 @@ namespace Utilities
           }
 
           public GameObject Get() => Get(true);
+          
+          private GameObject AddNewObjInstance()
+          {
+              GameObject newObj = UnityEngine.Object.Instantiate(_referenceObjInstance);
+              _objPool.Add(newObj);
+              return newObj;
+          }
+
+          private void OnObjectInPoolDisabled(GameObject obj)
+          {
+              
+          }
+              
       }
     }
 }
