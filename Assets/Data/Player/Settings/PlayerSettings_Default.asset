@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: PlayerSettings_Default
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSettingsSO
   _movementSpeed: 7.5
+  _damageInvulDuration: 2.5

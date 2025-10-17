@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _gameOverScoreText;
     [SerializeField] private TextMeshProUGUI _winScoreText;
     [SerializeField] private TextMeshProUGUI _timeText;
+    [SerializeField] private TextMeshProUGUI _livesText;
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private GameObject _winPanel;
@@ -15,6 +16,7 @@ public class UIManager : MonoBehaviour
     {
         GameManager.Instance.OnScoreChange += UpdateScoreUI;
         GameManager.Instance.OnTimeChange += UpdateTimeUI;
+        GameManager.Instance.OnLivesChange += UpdateLivesUI;
         GameManager.Instance.OnGameStateChange += OnGameStateChanged;
     }
 
@@ -39,6 +41,11 @@ public class UIManager : MonoBehaviour
     private void UpdateScoreUI(int value)
     {
         _scoreText.text = $"{value}";
+    }
+    
+    private void UpdateLivesUI(int value)
+    {
+        _livesText.text = $"{value}";
     }
     
     private void UpdateTimeUI(int value)

@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public Action<int> OnScoreChange;
     public Action<int> OnTimeChange;
+    public Action<int> OnLivesChange;
     public Action<GameState> OnGameStateChange;
 
     public static GameManager Instance;
@@ -42,9 +43,20 @@ public class GameManager : MonoBehaviour
             OnTimeChange?.Invoke(value);
         }
     }
+    
+    public int Lives
+    {
+        get => _lives;
+        set
+        {
+            _lives = value;
+            OnLivesChange?.Invoke(value);
+        }
+    }
 
     [SerializeField] private int _score = 0;
     [SerializeField] private int _timer = 0;
+    [SerializeField] private int _lives = 0;
     
     private GameState _currentGameState;
     
@@ -90,6 +102,9 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         OnScoreChange = null;
+        OnLivesChange = null;
+        OnTimeChange = null;
+        OnGameStateChange = null;
     }
 
     public void RestartScene()

@@ -4,6 +4,8 @@ using UnityEngine;
 public class PlayerSettingsSO : ScriptableObject
 {
     public float MovementSpeed => _movementSpeed;
+    public float DamageInvulDuration => _damageInvulDuration;
     
     [SerializeField] private float _movementSpeed;
+    [SerializeField] private float _damageInvulDuration;
 }

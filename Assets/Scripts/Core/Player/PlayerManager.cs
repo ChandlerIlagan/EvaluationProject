@@ -12,6 +12,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private MonoBehaviour _playerIDash;
     [Header("Dependencies-scene")]
     [SerializeField] private DeathCone _deathCone;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Animator _spriteAnimator;
 
     private IPlayerMovement _playerMovement => _playerIMovement as IPlayerMovement;
     private IPlayerWeaponController _playerWeaponController => _playerIWeaponController as IPlayerWeaponController;
@@ -19,6 +21,8 @@ public class PlayerManager : MonoBehaviour
     
     private InputSystem_Actions _inputSystem;
     private Rigidbody2D _playerRigidbody2D;
+    private GameManager _gameManager;
+    private bool _canTakeDamage;
 
     public static PlayerManager Instance;
 
@@ -36,6 +40,8 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        _gameManager = GameManager.Instance;
+        _canTakeDamage = true;
         _playerMovement.EnableMovement();
         _playerWeaponController.EnableWeapons();
         _playerDash.EnableDash();
@@ -46,10 +52,43 @@ public class PlayerManager : MonoBehaviour
         _playerMovement.Move2DRigid(_playerRigidbody2D).WithSpeed(_playerSettings.MovementSpeed);
     }
 
-    private void DoDeath()
+    private void TakeDamage()
     {
-        _deathCone.DoExplosion(transform.position);
+        if (!_canTakeDamage)
+            return;
+
+        _canTakeDamage = false;
+        _gameManager.Lives--;
+        _spriteAnimator.CrossFade("Invulnerable", 0f);
+        Invoke(nameof(BecomeVulnerable), _playerSettings.DamageInvulDuration);
+        
+        if (_gameManager.Lives > 0)
+        {
+            _deathCone.DoExplosion(transform.position);
+        }
+        else
+        {
+            Death();
+        }
     }
+
+    private void BecomeVulnerable()
+    {
+        _canTakeDamage = true;
+        _spriteAnimator.CrossFade("Vulnerable", 0f);
+    }
+
+    private void Death()
+    {
+        _spriteRenderer.enabled = false;
+        _playerMovement.DisableMovement();
+        _playerWeaponController.DisableWeapons();
+        _playerDash.DisableDash();
+     
+        Invoke(nameof(DoGameOverScreen), 1.0f);
+    }
+
+    private void DoGameOverScreen() => _gameManager.CurrentGameState = GameManager.GameState.GameOver;
     
     private void OnDestroy()
     {
@@ -59,7 +98,7 @@ public class PlayerManager : MonoBehaviour
     {  
         if (other.transform.CompareTag("Enemy"))
         {
-            DoDeath();
+            TakeDamage();
         }
     }
 
