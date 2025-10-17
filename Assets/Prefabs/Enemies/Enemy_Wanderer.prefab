@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6008352136236433615}
   - component: {fileID: 7575657579960133865}
   - component: {fileID: 3250095050986358318}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy_Wanderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9080115312727558236}
   - component: {fileID: 5533152874878753117}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Triangle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

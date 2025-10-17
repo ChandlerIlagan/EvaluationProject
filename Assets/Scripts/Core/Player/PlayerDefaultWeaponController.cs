@@ -12,6 +12,7 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
     [SerializeField] private GameObject _bulletPrefab;
     
     private bool _canShoot;
+    private float _timeLastShot;
     private InputSystem_Actions _inputSystem;
     private Pool.GameObj _bulletPool;
     private Coroutine _shootingRoutine;
@@ -19,6 +20,7 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
     
     public void Initialize(InputSystem_Actions inputSystem, PlayerSettingsSO playerSettings)
     {
+        _timeLastShot = Time.time;
         _shootingRoutine = null;
         _bulletPool = new Pool.GameObj(_initialBulletCount ,_bulletPrefab, transform);
         ChangeWeapon(_currentWeaponSettings);
@@ -46,18 +48,16 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
 
     private IEnumerator ShootingBehavior()
     {
-        float timeLastShot = Time.time;
-        
         while (_canShoot)
         {
-            if (Time.time - timeLastShot >= _currentWeaponSettings.ReloadTime)
+            if (Time.time - _timeLastShot >= _currentWeaponSettings.ReloadTime)
             {
                 Vector3 mousePos = Input.mousePosition;
                 mousePos.z = Mathf.Abs(Camera.main.transform.position.z);
                 Vector3 worldMouse = Camera.main.ScreenToWorldPoint(mousePos);
                 _currentAimDirection = (worldMouse - transform.position);
                 
-                timeLastShot = Time.time;
+                _timeLastShot = Time.time;
                 Shoot();
             }
             
