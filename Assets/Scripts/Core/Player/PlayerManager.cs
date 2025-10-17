@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private PlayerSettingsSO _playerSettings;
@@ -9,9 +10,11 @@ public class PlayerManager : MonoBehaviour
     private IPlayerMovement _playerMovement => _playerIMovement as IPlayerMovement;
     
     private InputSystem_Actions _inputSystem;
+    private Rigidbody2D _playerRigidbody2D;
 
     private void Awake()
     {
+        _playerRigidbody2D = GetComponent<Rigidbody2D>();
         _inputSystem = new InputSystem_Actions();
         _inputSystem.Enable();
         
@@ -25,7 +28,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        _playerMovement.WithSpeed(_playerSettings.MovementSpeed).MoveUpdate();
+        _playerMovement.Move2DRigid(_playerRigidbody2D).WithSpeed(_playerSettings.MovementSpeed);
     }
     
     private void OnDestroy()
