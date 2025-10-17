@@ -16,10 +16,12 @@ public class PlayerManager : MonoBehaviour
     private InputSystem_Actions _inputSystem;
     private Rigidbody2D _playerRigidbody2D;
 
+    public static PlayerManager Instance;
     public static GameState CurrentGameState = GameState.PreGame;
 
     private void Awake()
     {
+        Instance = this;
         _playerRigidbody2D = GetComponent<Rigidbody2D>();
         _inputSystem = new InputSystem_Actions();
         _inputSystem.Enable();

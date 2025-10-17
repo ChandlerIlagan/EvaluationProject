@@ -5,10 +5,12 @@ public abstract class EnemyBase : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] private int _hp;
-    [SerializeField] private float _moveSpeed;
+    [SerializeField] internal float _moveSpeed;
     [SerializeField] private int _scoreGiven;
 
     public Action<int> OnDeath;
+
+    public abstract void OnSpawn();
     
     public void TakeDamage(int damage)
     {
@@ -27,5 +29,6 @@ public abstract class EnemyBase : MonoBehaviour
     private void OnDisable()
     {
         OnDeath = null;
+        StopAllCoroutines();
     }
 }
