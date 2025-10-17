@@ -9,13 +9,15 @@ public class Bullet_Basic : MonoBehaviour, IPlayerBullet
     private Transform _origParent;
     private bool _isMoving;
     
-    public void Initialize(float moveSpeed, Vector2 direction, Transform origParent)
+    public void Initialize(float moveSpeed, Vector2 rawDirection, Transform origParent)
     {
         transform.parent = null;
+        float angle = Mathf.Atan2(rawDirection.y, rawDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
         
         _origParent = origParent;
         _speed = moveSpeed;
-        _direction = direction;
+        _direction = rawDirection.normalized;
 
         StartCoroutine(BulletBehavior());
     }

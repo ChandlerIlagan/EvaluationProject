@@ -53,6 +53,11 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
         {
             if (Time.time - timeLastShot >= _currentWeaponSettings.ReloadTime)
             {
+                Vector3 mousePos = Input.mousePosition;
+                mousePos.z = Mathf.Abs(Camera.main.transform.position.z);
+                Vector3 worldMouse = Camera.main.ScreenToWorldPoint(mousePos);
+                _currentAimDirection = (worldMouse - transform.position);
+                
                 timeLastShot = Time.time;
                 Shoot();
             }
