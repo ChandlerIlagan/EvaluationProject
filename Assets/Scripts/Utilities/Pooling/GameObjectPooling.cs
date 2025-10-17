@@ -11,6 +11,7 @@ namespace Utilities
     /// <summary>
     /// Lightweight-object-pooling where it creates disabled instances
     /// Highly recommended to initialize on Awake()
+    /// GameObject & Parent.Transform = REQUIRED, size of pool = OPTIONAL
     ///     > Will get first index[0] if disabled using Get()
     ///     > else will create new instance
     ///     > Gotten instances will push itself to last index
@@ -35,12 +36,11 @@ namespace Utilities
                   GameObject newObj = AddNewObjInstance();
                   
                   if (parent != null)
-                      newObj.transform.parent = parent;
+                      newObj.transform.SetParent(parent);
               }
           }
           
           public GameObj(GameObject obj, Transform parent) : this(_defaultInitialPoolSize, obj, parent) {}
-          public GameObj(GameObject obj) : this(_defaultInitialPoolSize, obj, null) {}
 
           public GameObject Get(bool isActiveOnGet)
           {
@@ -60,15 +60,13 @@ namespace Utilities
           private GameObject AddNewObjInstance()
           {
               GameObject newObj = UnityEngine.Object.Instantiate(_referenceObjInstance);
+              PooledObject pooledObject = newObj.AddComponent<PooledObject>();
+              pooledObject.OnDisabled += OnObjectInPoolDisabled;
               _objPool.Add(newObj);
               return newObj;
           }
 
-          private void OnObjectInPoolDisabled(GameObject obj)
-          {
-              
-          }
-              
+          private void OnObjectInPoolDisabled(GameObject obj) => obj.transform.SetAsFirstSibling();
       }
     }
 }
