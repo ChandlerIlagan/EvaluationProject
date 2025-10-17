@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03875b680cd022440b1ec502bce5f30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Wanderer
-  _hp: 2
+  _hp: 1
   _moveSpeed: 2
   _scoreGiven: 100
 --- !u!212 &6008352136236433615

@@ -13,12 +13,14 @@ public class Spawner : MonoBehaviour
 
     public void DoSpawnDelay(float delay)
     {
+        gameObject.SetActive(true);
         Invoke(nameof(CallSpawnerAndSpawn), delay);
     }
 
     private void CallSpawnerAndSpawn()
     {
         _spawnManager.SpawnEnemy(transform.position);
+        gameObject.SetActive(false);
     }
 
 #if UNITY_EDITOR

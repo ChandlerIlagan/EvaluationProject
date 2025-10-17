@@ -69,6 +69,7 @@ public class SpawnManager : MonoBehaviour
         if (!_canSpawn)
             return;
         
+        Debug.Log("Spawn");
         if (Time.time - _timeLastSpawned >= _spawnDelay)
         {
             _timeLastSpawned = Time.time;

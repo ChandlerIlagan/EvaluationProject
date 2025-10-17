@@ -51,7 +51,11 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Score = 0;
+        Invoke(nameof(StartGame), 0.5f);
+    }
 
+    private void StartGame()
+    {
         CurrentGameState = GameState.Start;
     }
 
