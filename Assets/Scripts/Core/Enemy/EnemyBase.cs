@@ -8,8 +8,6 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] internal float _moveSpeed;
     [SerializeField] private int _scoreGiven;
 
-    public Action<int> OnDeath;
-
     public abstract void OnSpawn();
     
     public void TakeDamage(int damage)
@@ -22,13 +20,12 @@ public abstract class EnemyBase : MonoBehaviour
 
     private void Death()
     {
-        OnDeath?.Invoke(_scoreGiven);
+        GameManager.Instance.Score += _scoreGiven;
         gameObject.SetActive(false);
     }
 
     private void OnDisable()
     {
-        OnDeath = null;
         StopAllCoroutines();
     }
 }
