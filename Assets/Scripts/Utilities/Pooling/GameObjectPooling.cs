@@ -66,14 +66,3 @@ namespace Utilities
       }
     }
 }
-
-public class Test
-{
-    private Pool.GameObj _bulletPool;
-    
-    private void Start()
-    {
-        _bulletPool = new Pool.GameObj( 10 , new GameObject());
-        _bulletPool = new Pool.GameObj( new GameObject());
-    }
-}
