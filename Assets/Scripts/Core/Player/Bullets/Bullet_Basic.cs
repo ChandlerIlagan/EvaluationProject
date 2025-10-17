@@ -6,9 +6,11 @@ public class Bullet_Basic : MonoBehaviour, IPlayerBullet
 {
     private float _speed;
     private Vector2 _direction;
+    private Transform _origParent;
     
-    public void Initialize(float moveSpeed, Vector2 direction)
+    public void Initialize(float moveSpeed, Vector2 direction, Transform origParent)
     {
+        _origParent = origParent;
         _speed = moveSpeed;
         _direction = direction;
     }
@@ -22,5 +24,9 @@ public class Bullet_Basic : MonoBehaviour, IPlayerBullet
         }
     }
 
-    private void OnDisable() => StopAllCoroutines();
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        transform.parent = _origParent;
+    }
 }

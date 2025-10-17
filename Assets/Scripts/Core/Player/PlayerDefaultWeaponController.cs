@@ -16,6 +16,7 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
     private PlayerWeaponSettingsSO _currentWeaponSettings;
     private Pool.GameObj _bulletPool;
     private Coroutine _shootingRoutine;
+    private Vector2 _currentAimDirection = Vector2.right;
     
     public void Initialize(InputSystem_Actions inputSystem, PlayerSettingsSO playerSettings)
     {
@@ -46,7 +47,27 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
 
     private IEnumerator ShootingBehavior()
     {
+        float tick = 0;
         
+        while (_canShoot)
+        {
+            tick += Time.deltaTime;
+
+            if (tick >= _currentWeaponSettings.ReloadTime)
+            {
+                tick = 0;
+                Shoot();
+            }
+            
+            yield return null;
+        }
+    }
+
+    private void Shoot()
+    {
+        GameObject bullet = _bulletPool.Get();
+        bullet.transform.position = transform.position;
+        bullet.GetComponent<IPlayerBullet>().Initialize(_currentWeaponSettings.ShootForce , _currentAimDirection, transform);
     }
 
     public void ChangeWeapon(PlayerWeaponSettingsSO weaponSetting)
@@ -59,6 +80,7 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
 
     private void OnDisable()
     {
-        _inputSystem.Player.Shoot.performed -= OnShoot;
+        _inputSystem.Player.Shoot.performed -= OnShootStart;
+        _inputSystem.Player.Shoot.canceled -= OnShootStop;
     }
 }
