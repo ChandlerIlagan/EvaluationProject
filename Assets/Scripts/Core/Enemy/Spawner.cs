@@ -3,9 +3,22 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    private SpawnManager _spawnManager;
+    
     private void Start()
     {
-        SpawnManager.Instance.AddSpawnerToPool(gameObject);
+        _spawnManager = SpawnManager.Instance;
+        _spawnManager.AddSpawnerToPool(this);
+    }
+
+    public void DoSpawnDelay(float delay)
+    {
+        Invoke(nameof(CallSpawnerAndSpawn), delay);
+    }
+
+    private void CallSpawnerAndSpawn()
+    {
+        _spawnManager.SpawnEnemy(transform.position);
     }
 
 #if UNITY_EDITOR
