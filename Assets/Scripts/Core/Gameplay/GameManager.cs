@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class GameManager : MonoBehaviour
         get => _currentGameState;
         set
         {
+            if (value == GameState.GameOver || value == GameState.Pause || value == GameState.Win)
+                PauseGame();
+                
             _currentGameState = value;
             OnGameStateChange?.Invoke(value);
         }
@@ -39,9 +43,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [SerializeField] private int _score = 0;
+    [SerializeField] private int _timer = 0;
+    
     private GameState _currentGameState;
-    private int _score = 0;
-    private int _timer = 0;
     
     private void Awake()
     {
@@ -57,17 +62,48 @@ public class GameManager : MonoBehaviour
     private void StartGame()
     {
         CurrentGameState = GameState.Start;
+        TickTimer();
     }
 
+    private void TickTimer()
+    {
+        Timer--;
+        
+        if (Timer <= 0)
+            CurrentGameState = GameState.Win;
+        
+        if (CurrentGameState == GameState.Start)
+            Invoke(nameof(TickTimer), 1.0f);
+    }
+
+    public void PauseGame()
+    {
+        CurrentGameState = GameState.Pause;
+        Time.timeScale = 0;
+    }
+    
+    public void UnpauseGame()
+    {
+        CurrentGameState = GameState.Start;
+        Time.timeScale = 1;
+    }
     private void OnDisable()
     {
         OnScoreChange = null;
+    }
+
+    public void RestartScene()
+    {
+        UnpauseGame();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
     public enum GameState
     {
         PreGame,
         Start,
-        GameOver
+        Pause,
+        GameOver,
+        Win
     }
 }
