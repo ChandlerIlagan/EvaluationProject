@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private MonoBehaviour _playerIMovement;
 
     private IPlayerMovement _playerMovement => _playerIMovement as IPlayerMovement;
+    
     private void Start()
     {
         _playerMovement.EnableMovement();

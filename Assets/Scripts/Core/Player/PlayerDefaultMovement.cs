@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerDefaultMovement : MonoBehaviour, IPlayerMovement
 {
@@ -6,7 +8,7 @@ public class PlayerDefaultMovement : MonoBehaviour, IPlayerMovement
 
     private bool _canMove;
     private float _moveSpeed = 0;
-    
+
     public IPlayerMovement MoveUpdate()
     {
         if (!_canMove)

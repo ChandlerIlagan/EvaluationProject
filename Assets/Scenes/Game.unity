@@ -526,6 +526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477fafb43a9f3304fa271335f08189a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
+  _playerSettings: {fileID: 11400000, guid: 332fd9043cae31e4ea8bd2324ce31bc1, type: 2}
+  _playerIMovement: {fileID: 800344741}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
