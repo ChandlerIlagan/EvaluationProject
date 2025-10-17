@@ -58,5 +58,9 @@ public class Bullet_Basic : MonoBehaviour, IPlayerBullet
             other.GetComponent<EnemyBase>().TakeDamage(1);
             CollisionDisable();
         }
+        else if (other.transform.CompareTag("Wall"))
+        {
+            CollisionDisable();
+        }
     }
 }
