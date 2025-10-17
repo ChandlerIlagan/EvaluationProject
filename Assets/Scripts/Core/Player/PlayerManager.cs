@@ -26,6 +26,7 @@ public class PlayerManager : MonoBehaviour
         
         _playerMovement.Initialize(_inputSystem);
         _playerWeaponController.Initialize(_inputSystem, _playerSettings);
+        _playerDash.Initialize(_inputSystem, _playerMovement);
     }
 
     private void Start()

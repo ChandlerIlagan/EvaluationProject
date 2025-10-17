@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6decef41f2251714785cbb5cc2c7dcf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDefaultDash
-  _dashSpeedMultiplier: 1.5
-  _dashDuration: 1.2
+  _dashSpeedMultiplier: 1.75
+  _dashDuration: 0.75
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,6 +486,7 @@ MonoBehaviour:
   _playerSettings: {fileID: 11400000, guid: 332fd9043cae31e4ea8bd2324ce31bc1, type: 2}
   _playerIMovement: {fileID: 800344741}
   _playerIWeaponController: {fileID: 2070057800}
+  _playerIDash: {fileID: 79893726}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

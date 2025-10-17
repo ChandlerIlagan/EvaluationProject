@@ -15,6 +15,7 @@ public class PlayerDefaultMovement : MonoBehaviour, IPlayerMovement
     
     public void Initialize(InputSystem_Actions inputSystem)
     {
+        DashMultiplier = 1;
         _inputSystem = inputSystem;
 
         _inputSystem.Player.Move.performed += OnMovePressed;
