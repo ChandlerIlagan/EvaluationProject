@@ -15,11 +15,13 @@ public class PlayerDefaultMovement : MonoBehaviour, IPlayerMovement
     private float _moveSpeed = 0;
     private Vector2 _movementOffset;
     private InputSystem_Actions _inputSystem;
+    private GameManager _gameManager;
     
     public void Initialize(InputSystem_Actions inputSystem)
     {
         DashMultiplier = 1;
         _inputSystem = inputSystem;
+        _gameManager = GameManager.Instance;
 
         _inputSystem.Player.Move.performed += OnMovePressed;
         _inputSystem.Player.Move.canceled += OnMoveReleased;
@@ -43,7 +45,7 @@ public class PlayerDefaultMovement : MonoBehaviour, IPlayerMovement
 
     public IPlayerMovement Move2DRigid(Rigidbody2D body)
     {
-        if (!_canMove)
+        if (!_canMove && _gameManager.CurrentGameState != GameManager.GameState.Start)
             return this;
 
         body.linearVelocity = _movementOffset * _moveSpeed * DashMultiplier;
