@@ -5,10 +5,15 @@ using UnityEngine.InputSystem;
 public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponController
 {
     private bool _canShoot;
+    private float _shootForce;
+    private InputSystem_Actions _inputSystem;
     
-    public void Initialize(InputSystem_Actions inputSystem)
+    public void Initialize(InputSystem_Actions inputSystem, PlayerSettingsSO playerSettings)
     {
-        inputSystem.Player.Shoot.performed += OnShoot;
+        _shootForce = playerSettings.ShootForce;
+        
+        _inputSystem = inputSystem;
+        _inputSystem.Player.Shoot.performed += OnShoot;
     }
 
     private void OnShoot(InputAction.CallbackContext obj)
@@ -23,4 +28,9 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
 
     public void EnableWeapons() => _canShoot = true;
     public void DisableWeapons() => _canShoot = false;
+
+    private void OnDisable()
+    {
+        _inputSystem.Player.Shoot.performed -= OnShoot;
+    }
 }
