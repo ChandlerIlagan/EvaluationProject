@@ -8,6 +8,16 @@ public class PlayerManager : MonoBehaviour
 
     private IPlayerMovement _playerMovement => _playerIMovement as IPlayerMovement;
     
+    private InputSystem_Actions _inputSystem;
+
+    private void Awake()
+    {
+        _inputSystem = new InputSystem_Actions();
+        _inputSystem.Enable();
+        
+        _playerMovement.Initialize(_inputSystem);
+    }
+
     private void Start()
     {
         _playerMovement.EnableMovement();
@@ -16,6 +26,11 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         _playerMovement.WithSpeed(_playerSettings.MovementSpeed).MoveUpdate();
+    }
+    
+    private void OnDestroy()
+    {
+        _inputSystem.Disable();
     }
     
     #if UNITY_EDITOR

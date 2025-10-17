@@ -7,4 +7,5 @@ public interface IPlayerMovement
     IPlayerMovement WithSpeed(float speed);
     public void EnableMovement();
     public void DisableMovement();
+    public void Initialize(InputSystem_Actions inputSystem);
 }

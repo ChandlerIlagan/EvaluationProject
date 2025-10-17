@@ -12,6 +12,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
@@ -853,12 +854,14 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.Enable()" />
     public void Enable()
     {
+        Debug.Log($"[InputSystem] '{asset.name}' Enabled");
         asset.Enable();
     }
 
     /// <inheritdoc cref="UnityEngine.InputSystem.InputActionAsset.Disable()" />
     public void Disable()
     {
+        Debug.Log($"[InputSystem] '{asset.name}' Disabled");
         asset.Disable();
     }
 
