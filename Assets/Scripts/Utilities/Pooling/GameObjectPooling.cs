@@ -25,15 +25,18 @@ namespace Utilities
 
           private List<GameObject> _objPool;
           private GameObject _referenceObjInstance;
+          private Transform _referenceParentTransform;
               
           public GameObj(int size, GameObject obj, Transform parent)
           {
               _objPool = new List<GameObject>();
               _referenceObjInstance = obj;
+              _referenceParentTransform = parent;
               
               for (int x = 0; x < size; x++)
               {
                   GameObject newObj = AddNewObjInstance();
+                  newObj.SetActive(false);
                   
                   if (parent != null)
                       newObj.transform.SetParent(parent);
@@ -44,14 +47,23 @@ namespace Utilities
 
           public GameObject Get(bool isActiveOnGet)
           {
-              GameObject objectToReturn;
-              
-              if (!_objPool[0].activeInHierarchy)
-                  objectToReturn = _objPool[0];
-              else
+              GameObject objectToReturn = null;
+
+              for (int i = 0; i < _objPool.Count; i++)
+              {
+                  if (!_objPool[i].activeInHierarchy)
+                  {
+                      objectToReturn = _objPool[i];
+                      break;
+                  }
+              }
+
+              if (objectToReturn == null)
                   objectToReturn = AddNewObjInstance();
 
               objectToReturn.SetActive(isActiveOnGet);
+              objectToReturn.transform.SetAsLastSibling();
+
               return objectToReturn;
           }
 
@@ -59,14 +71,18 @@ namespace Utilities
           
           private GameObject AddNewObjInstance()
           {
-              GameObject newObj = UnityEngine.Object.Instantiate(_referenceObjInstance);
+              GameObject newObj = UnityEngine.Object.Instantiate(_referenceObjInstance, _referenceParentTransform);
               PooledObject pooledObject = newObj.AddComponent<PooledObject>();
               pooledObject.OnDisabled += OnObjectInPoolDisabled;
               _objPool.Add(newObj);
               return newObj;
           }
 
-          private void OnObjectInPoolDisabled(GameObject obj) => obj.transform.SetAsFirstSibling();
+          private void OnObjectInPoolDisabled(GameObject obj)
+          {
+              if (Application.isPlaying) obj.transform.SetAsFirstSibling();
+          }
       }
+      
     }
 }
