@@ -7,7 +7,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        _playerMovement.EnableMovementInputs();
+        _playerMovement.EnableMovement();
     }
 
     private void Update()
