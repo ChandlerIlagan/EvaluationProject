@@ -3,10 +3,9 @@ using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour
 {
-    [Header("Stats")]
-    [SerializeField] private int _hp;
-    [SerializeField] internal float _moveSpeed;
-    [SerializeField] private int _scoreGiven;
+    internal int _hp;
+    internal float _moveSpeed;
+    internal int _scoreGiven;
 
     public abstract void OnSpawn();
     
@@ -21,6 +20,7 @@ public abstract class EnemyBase : MonoBehaviour
     private void Death()
     {
         GameManager.Instance.Score += _scoreGiven;
+        FXManager.Instance.DoFX(FXManager.FXList.EnemyExplosion , transform.position);
         gameObject.SetActive(false);
     }
 

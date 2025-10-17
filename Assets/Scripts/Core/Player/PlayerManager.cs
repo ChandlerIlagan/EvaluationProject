@@ -14,6 +14,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private DeathCone _deathCone;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Animator _spriteAnimator;
+    [Header("Dependencies-data")]
+    [SerializeField] private PlayerWeaponSettingsSO _defaultWeapon;
+    [SerializeField] private PlayerWeaponSettingsSO _rapidFire;
 
     private IPlayerMovement _playerMovement => _playerIMovement as IPlayerMovement;
     private IPlayerWeaponController _playerWeaponController => _playerIWeaponController as IPlayerWeaponController;
@@ -49,7 +52,8 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        _playerMovement.Move2DRigid(_playerRigidbody2D).WithSpeed(_playerSettings.MovementSpeed);
+        if (_playerMovement != null)
+            _playerMovement.Move2DRigid(_playerRigidbody2D).WithSpeed(_playerSettings.MovementSpeed);
     }
 
     private void TakeDamage()
@@ -100,6 +104,24 @@ public class PlayerManager : MonoBehaviour
         {
             TakeDamage();
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Powerup"))
+        {
+            if (_playerWeaponController.CurrentWeaponSettings == _defaultWeapon)
+            {
+                Invoke(nameof(ResetWeaponToDefault), other.GetComponent<Powerup>().PowerupDuration);
+                _playerWeaponController.ChangeWeapon(_rapidFire);
+                other.gameObject.SetActive(false);
+            }
+        }   
+    }
+
+    private void ResetWeaponToDefault()
+    {
+        _playerWeaponController.ChangeWeapon(_defaultWeapon);
     }
 
 #if UNITY_EDITOR

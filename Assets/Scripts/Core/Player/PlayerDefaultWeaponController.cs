@@ -10,14 +10,15 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
     
     [SerializeField] private PlayerWeaponSettingsSO _currentWeaponSettings;
     [SerializeField] private GameObject _bulletPrefab;
-    
     private bool _canShoot;
     private float _timeLastShot;
     private InputSystem_Actions _inputSystem;
     private Pool.GameObj _bulletPool;
     private Coroutine _shootingRoutine;
     private Vector2 _currentAimDirection = Vector2.right;
-    
+
+    public PlayerWeaponSettingsSO CurrentWeaponSettings => _currentWeaponSettings;
+
     public void Initialize(InputSystem_Actions inputSystem, PlayerSettingsSO playerSettings)
     {
         _timeLastShot = Time.time;

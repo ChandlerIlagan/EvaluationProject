@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -54,9 +55,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public int Level => _level;
+
+    [SerializeField] private int _level = 1;
     [SerializeField] private int _score = 0;
     [SerializeField] private int _timer = 0;
     [SerializeField] private int _lives = 0;
+    
+    [Header("Dependencies")]
+    [SerializeField] private Slider _volumeSlider;
     
     private GameState _currentGameState;
     
@@ -67,21 +74,33 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 0;
         Score = 0;
-        Invoke(nameof(StartGame), 0.5f);
     }
 
-    private void StartGame()
+    public void StartGame()
     {
+        Time.timeScale = 1;
+        GetComponent<AudioSource>().Play();
+        _volumeSlider.value = GetComponent<AudioSource>().volume;
         CurrentGameState = GameState.Start;
         TickTimer();
+    }
+
+    public void OnVolumeChange(float value)
+    {
+        GetComponent<AudioSource>().volume = value;
     }
 
     private void TickTimer()
     {
         Timer--;
-        
-        if (Timer <= 0)
+
+        if (Timer <= 60)
+            _level = 2;
+        else if (Timer <= 30)
+            _level = 3;
+        else if (Timer <= 0)
             CurrentGameState = GameState.Win;
         
         if (CurrentGameState == GameState.Start)

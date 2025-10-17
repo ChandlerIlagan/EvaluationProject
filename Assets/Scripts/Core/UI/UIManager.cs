@@ -41,6 +41,8 @@ public class UIManager : MonoBehaviour
     private void UpdateScoreUI(int value)
     {
         _scoreText.text = $"{value}";
+        _gameOverScoreText.text = $"{value}";
+        _winScoreText.text = $"{value}";
     }
     
     private void UpdateLivesUI(int value)

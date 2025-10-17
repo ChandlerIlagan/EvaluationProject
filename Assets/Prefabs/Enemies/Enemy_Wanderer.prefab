@@ -47,9 +47,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03875b680cd022440b1ec502bce5f30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Wanderer
-  _hp: 1
-  _moveSpeed: 2
-  _scoreGiven: 100
+  _levels:
+  - SpawnHP: 1
+    SpawnSpeed: 4
+    ScoreGiven: 50
+    SpawnColor: {r: 0.7971698, g: 0.9715818, b: 1, a: 1}
+  - SpawnHP: 2
+    SpawnSpeed: 3
+    ScoreGiven: 100
+    SpawnColor: {r: 0.36258516, g: 1, b: 0.13679248, a: 1}
+  - SpawnHP: 3
+    SpawnSpeed: 2
+    ScoreGiven: 150
+    SpawnColor: {r: 1, g: 0.1462264, b: 0.1462264, a: 1}
 --- !u!212 &6008352136236433615
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -98,7 +108,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2942823943379307754, guid: ff997b156dcbe96479a201e66f4f9792, type: 3}
-  m_Color: {r: 0.48801908, g: 0.8962264, b: 0.1986917, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

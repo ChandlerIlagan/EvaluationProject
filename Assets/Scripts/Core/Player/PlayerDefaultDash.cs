@@ -6,6 +6,7 @@ public class PlayerDefaultDash : MonoBehaviour , IPlayerDash
 {
     [SerializeField] private float _dashSpeedMultiplier = 1.5f;
     [SerializeField] private float _dashDuration = 1.2f;
+    [SerializeField] private float _dashCooldown = 3f;
     
     private bool _canDash = false;
     private float _lastDashTime;
@@ -32,6 +33,9 @@ public class PlayerDefaultDash : MonoBehaviour , IPlayerDash
 
     private void Dash()
     {
+        if (Time.time - _lastDashTime <= _dashCooldown)
+            return;
+        
         _lastDashTime = Time.time;
         _playerMovement.DashMultiplier = _dashSpeedMultiplier;
         Invoke(nameof(CancelDash), _dashDuration);

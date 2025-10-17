@@ -89,6 +89,7 @@ public class SpawnManager : MonoBehaviour
     public void SpawnEnemy(Vector2 position)
     {
         GameObject spawnedEnemy = _basicEnemyPool.Get();
+        spawnedEnemy.GetComponent<EnemyBase>().OnSpawn();
         spawnedEnemy.transform.position = position;
     }
 }
