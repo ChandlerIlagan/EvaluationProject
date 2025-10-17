@@ -4,13 +4,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponController
 {
+    [SerializeField] private PlayerWeaponSettingsSO _initialWeaponSetting;
+    
     private bool _canShoot;
     private float _shootForce;
     private InputSystem_Actions _inputSystem;
+    private PlayerWeaponSettingsSO _currentWeaponSettings;
     
     public void Initialize(InputSystem_Actions inputSystem, PlayerSettingsSO playerSettings)
     {
         _shootForce = playerSettings.ShootForce;
+        ChangeWeapon(_initialWeaponSetting);
         
         _inputSystem = inputSystem;
         _inputSystem.Player.Shoot.performed += OnShoot;
@@ -24,6 +28,11 @@ public class PlayerDefaultWeaponController : MonoBehaviour, IPlayerWeaponControl
     private void Update()
     {
         
+    }
+
+    public void ChangeWeapon(PlayerWeaponSettingsSO weaponSetting)
+    {
+        _currentWeaponSettings = weaponSetting;
     }
 
     public void EnableWeapons() => _canShoot = true;
