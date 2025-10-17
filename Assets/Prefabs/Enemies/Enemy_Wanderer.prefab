@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3250095050986358318}
   m_Layer: 6
   m_Name: Enemy_Wanderer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03875b680cd022440b1ec502bce5f30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Wanderer
-  _hp: 1
+  _hp: 2
   _moveSpeed: 2
   _scoreGiven: 100
 --- !u!212 &6008352136236433615

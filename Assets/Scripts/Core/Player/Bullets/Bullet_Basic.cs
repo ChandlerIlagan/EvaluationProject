@@ -50,4 +50,13 @@ public class Bullet_Basic : MonoBehaviour, IPlayerBullet
             gameObject.SetActive(false);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.transform.CompareTag("Enemy"))
+        {
+            other.GetComponent<EnemyBase>().TakeDamage(1);
+            CollisionDisable();
+        }
+    }
 }
